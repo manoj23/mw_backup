@@ -4,7 +4,7 @@ mw_backup
 `mw_backup` is a simple script used to dump `mediawiki` database. To connect to
 the database, it uses `LocalSettings.php`.
 
-This script depends on: sh, date, and git.
+This script depends on: sh, date, mysqldump, and git.
 
 ## Example
 
