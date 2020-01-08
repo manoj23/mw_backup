@@ -15,7 +15,7 @@ mw_backup()
 	mw_local_settings="$mw_root/LocalSettings.php"
 	mw_local_settings_backup=$(mktemp)
 	mw_db_type=$(mw_var "$mw_local_settings" "wgDBtype")
-	mw_db_server=$(mw_var "$mw_local_settings" "wgDBserver")
+	mw_db_server=$(mw_var "$mw_local_settings" "wgDBserver" | cut -d ':' -f 1)
 	mw_db_name=$(mw_var "$mw_local_settings" "wgDBname")
 	mw_db_user=$(mw_var "$mw_local_settings" "wgDBuser")
 	mw_db_password=$(mw_var "$mw_local_settings" "wgDBpassword")
