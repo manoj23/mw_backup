@@ -24,6 +24,8 @@ mw_backup()
 	[ ! -d "$mw_backup_output" ] && echo "$mw_backup_output directory does not exist" && exit 2
 	[ ! -d "$mw_backup_output/.git" ] && echo "$mw_backup_output directory is not a git repository" && exit 3
 
+	[ -n "$mw_db_password" ] && export MYSQL_PWD="$mw_db_password"
+
 	cp -p "$mw_local_settings" "$mw_local_settings_backup"
 	cp "$mw_local_settings" "$mw_backup_output"
 	echo "\$wgReadOnly = 'Dumping Database, Access will be restored shortly';" >> "$mw_local_settings"
