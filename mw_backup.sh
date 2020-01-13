@@ -35,6 +35,7 @@ mw_backup()
 			(cd "$mw_backup_output" \
 				&& mw_commit_message="$(date --iso-8601) - $(tail -n 1 mw-db.sql)" \
 				&& sed -i '$ d' mw-db.sql \
+				&& sed -i "/INSERT INTO \`objectcache\` VALUES/d" mw-db.sql \
 				&& git add mw-db.sql LocalSettings.php \
 				&& git commit -m "$mw_commit_message" \
 				&& git push)
