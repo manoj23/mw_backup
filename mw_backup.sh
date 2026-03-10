@@ -30,7 +30,7 @@ mw_backup()
 	cp "$mw_local_settings" "$mw_backup_output"
 	echo "\$wgReadOnly = 'Dumping Database, Access will be restored shortly';" >> "$mw_local_settings"
 
-	if mysqldump -h "$mw_db_server" -u "$mw_db_user" "$mw_db_name" \
+	if mariadb-dump -h "$mw_db_server" -u "$mw_db_user" "$mw_db_name" \
 		--default-character-set=utf8 > "$mw_backup_output/mw-db.sql"; then
 			(cd "$mw_backup_output" \
 				&& mw_commit_message="$(date --iso-8601) - $(tail -n 1 mw-db.sql)" \
@@ -40,7 +40,7 @@ mw_backup()
 				&& git commit -m "$mw_commit_message" \
 				&& git push)
 	else
-		echo "mysqldump failed"
+		echo "mariadb-dump failed"
 	fi
 
 	mv "$mw_local_settings_backup" "$mw_local_settings"
